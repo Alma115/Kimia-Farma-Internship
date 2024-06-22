@@ -1,0 +1,38 @@
+--Membuat Tabel Analisa
+
+CREATE TABLE `rakamin-kf-analytics-427207.kimia_farma.kf_analysis_table` AS(
+SELECT
+  ft.transaction_id,
+  ft.date,
+  ft.branch_id,
+  kc.branch_name,
+  kc.kota,
+  kc.provinsi,
+  kc.rating rating_cabang,
+  ft.customer_name,
+  ft.product_id,
+  p.product_name,
+  p.price actual_price,
+  ft.discount_percentage,
+--Menghitung Persentase gross laba sesuai ketentuan
+  CASE 
+    WHEN p.price <= 50000 THEN 0.1
+    WHEN p.price > 50000 AND p.price <= 100000 THEN 0.15
+    WHEN p.price > 100000 AND p.price <= 300000 THEN 0.2
+    WHEN p.price > 300000 AND p.price <= 500000 THEN 0.25
+    WHEN p.price > 50000 THEN 0.3
+  END persentase_gross_laba,
+--Menghitung Nett Sales (Harga Setelah Diskon)
+  p.price-(p.price*ft.discount_percentage) nett_sales,
+--Menghitung Nett Profit (Keuntungan setelah diskon)
+  ft.price-(p.price-(p.price*ft.discount_percentage)) nett_profit,
+  ft.rating rating_transaksi
+FROM
+  `rakamin-kf-analytics-427207.kimia_farma.kf_final_transaction` as ft
+--Menggabungkan tabel final transaksi dan tabel kantor cabang
+JOIN
+  `rakamin-kf-analytics-427207.kimia_farma.kf_kantor_cabang` as kc ON ft.branch_id=kc.branch_id
+--Menggabungkan tabel final transaksi dan tabel produk
+JOIN
+  `rakamin-kf-analytics-427207.kimia_farma.kf_product` as p ON ft.product_id=p.product_id
+)
