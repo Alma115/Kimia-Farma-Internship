@@ -11,12 +11,10 @@
 </details>
 
 <br>
-Visualization : [Lihat dashboard](https://lookerstudio.google.com/reporting/d1c0d12d-e05d-4569-83c4-ae308894e02d)
-<br>
-Dataset : [PBI kimia farma](https://drive.google.com/drive/folders/1lmHjlOHFhlVC0gpGcmpB5ENeJI51uQms?usp=sharing)
-<br>
-Tabel Analisa: [Hasil tabel analisa](https://drive.google.com/file/d/1WShCHDzb7H3p5jY89vEHPEX-41umeKfk/view?usp=sharing)
-<br>
+
+Visualization : [Lihat dashboard](https://lookerstudio.google.com/reporting/d1c0d12d-e05d-4569-83c4-ae308894e02d)<br>
+Dataset : [PBI kimia farma](https://drive.google.com/drive/folders/1lmHjlOHFhlVC0gpGcmpB5ENeJI51uQms?usp=sharing)<br>
+Tabel Analisa: [Hasil tabel analisa](https://drive.google.com/file/d/1WShCHDzb7H3p5jY89vEHPEX-41umeKfk/view?usp=sharing)<br>
 
 
 ---
