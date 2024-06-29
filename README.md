@@ -1,121 +1,127 @@
 # **Bigdata Analysis - Kimia Farma**
 
-Visualization : Looker Data Studio - [Lihat dashboard](https://lookerstudio.google.com/reporting/d1c0d12d-e05d-4569-83c4-ae308894e02d) <br>
-Dataset : [PBI Kimia Farma](https://drive.google.com/drive/folders/1lmHjlOHFhlVC0gpGcmpB5ENeJI51uQms?usp=sharing)
+Visualization : [Lihat dashboard](https://lookerstudio.google.com/reporting/d1c0d12d-e05d-4569-83c4-ae308894e02d)
 <br>
-
+Dataset : [PBI kimia farma](https://drive.google.com/drive/folders/1lmHjlOHFhlVC0gpGcmpB5ENeJI51uQms?usp=sharing)
+<br>
+Tabel Analisa: [Hasil tabel analisa](https://drive.google.com/file/d/1WShCHDzb7H3p5jY89vEHPEX-41umeKfk/view?usp=sharing)
+<br>
 ---
-## 📂 **Introduction**
+**Introduction**
+<br>
 Program Project Based Internship kolaborasi [Rakamin Academy](https://www.rakamin.com/) dan [Kimia Farma](https://www.kimiafarma.co.id/). Pada project ini saya berperan sebagai Data Analyst Intern yang diminta untuk menganalisis performa perusahaan menggunakan data-data yang telah disediakan.<br>
 <br>
 **Objectives**
-- Membuat tabel analysis (tabel base dan tabel aggregat)
-- Membuat visualisasi/dashboard Performance Analysis di Kimia Farma pada tahun 2020-2023<br>
+- Membuat tabel analysis 
+- Membuat visualisasi/dashboard Performance Analysis di Kimia Farma pada tahun 2020-2023
+<br>
 
-**Dataset** <br>
+**Dataset** 
+<br>
 Dataset yang disediakan terdiri dari tabel-tabel berikut:
 - [kf_final_transaction.csv](https://drive.google.com/file/d/1OCl_PGpyGkp_I-L8eMTX0BzzdImc0l6m/view?usp=sharing)
 - [kf_inventory.csv](https://drive.google.com/file/d/11AkoPyC3x2cVDC1Fe3FQq1ZbuZHrz1Gs/view?usp=sharing)
-- kf_kantor_cabang.csv
-- kf_product.csv
+- [kf_kantor_cabang.csv](https://drive.google.com/file/d/1GfiT2_eTSSGa_OAUvj8IljmoCYgIGkdw/view?usp=sharing)
+- [kf_product.csv](https://drive.google.com/file/d/123-x6uvBk58qf8vieQyOcvFNW8J6z0f4/view?usp=sharing)
 <br>
 
-
-<details>
-  <summary>Klik untuk melihat Schema</summary>
-
-<p align="center">
-  <kbd> <img width="400" alt="schema" src=(image/schema.png)></kbd> <br>
-</p>
-
-</details>
-<br>
 
 ---
-## 📂 **Design Datamart**
-### Tabel Base
-Tabel base adalah tabel yang berisi data asli atau data mentah yang dikumpulkan dari sumbernya dan berisi informasi yang dibutuhkan untuk menjawab pertanyaan atau menyeselasikan masalah tertentu. Tabel base dalam project ini dibuat dari gabungan tabel penjaulan, pelanggan, dan barang dengan primary key pada `invoice_id` . <br>
-<details>
-  <summary> Klik untuk melihat Query </summary>
-    <br>
-    
-```sql
-CREATE TABLE base_table (
-SELECT
-    j.id_invoice,
-    j.tanggal,
-    j.id_customer,
-    c.nama,
-    j.id_distributor,
-    j.id_cabang,
-    c.cabang_sales,
-    c.id_group,
-    c.group,
-    j.id_barang,
-    b.nama_barang,
-    j.brand_id,
-    b.kode_lini,
-    j.lini,
-    b.kemasan,
-    j.jumlah,
-    j.harga,
-    j.mata_uang
-FROM penjualan j
-	LEFT JOIN pelanggan c
-		ON c.id_customer = j.id_customer
-	LEFT JOIN barang b
-		ON b.kode_barang = j.id_barang
-ORDER BY j.tanggal
-);
-ALTER TABLE base_table ADD PRIMARY KEY(id_invoice);
-```
-    
+## Tabel Analisa
 <br>
-</details>
+Setelah mengimport dataset ke bigquery, selanjutnya membuat tabel analisa menggunakan syntaks SQL. Tabel Analisa berisi table agregasi dari ke empat tabel yang sudah diimport. Berikut ini adalah kolom kolom yang mandatory pada table tersebut:
 <br>
-<p align="center">
-    <kbd> <img width="1000" alt="sample table base" src="[https://user-images.githubusercontent.com/115857221/222876639-20e1e208-1c5b-4279-8e18-ec937c56f526.png](https://drive.google.com/file/d/1yep0EQzHCvAQQr4GlzlwpjqnM6NyS8a0/view?usp=sharing)"> </kbd> <br>
-    Gambar 1 — Sampel Hasil Pembuatan Tabel Base 
-</p>
-<br>
-### Tabel Aggregat
-Tabel agregat adalah tabel yang dibuat dengan mengumpulkan dan menghitung data dari tabel basis. Tabel aggregat ini berisi informasi yang lebih ringkas dan digunakan untuk menganalisis data lebih cepat dan efisien. Hasil tabel ini akan digunakan untuk sumber pembuatan dashboard laporan penjualan.
+- transaction_id 	: kode id transaksi, 
+- date 			: tanggal transaksi dilakukan, 
+- branch_id 		: kode id cabang Kimia Farma, 
+- branch_name 		: nama cabang Kimia Farma, 
+- kota 			: kota cabang Kimia Farma,
+- provinsi 		: provinsi cabang Kimia Farma, 
+- rating_cabang 	: penilaian konsumen terhadap cabang Kimia Farma
+- customer_name 	: Nama customer yang melakukan transaksi
+- product_id	 	: kode product obat,
+- product_name 		: nama obat,
+- actual_price 		: harga obat,
+- discount_percentage 	: Persentase diskon yang diberikan pada obat,
+- persentase_gross_laba : Persentase laba yang seharusnya diterima dari obat dengan ketentuan berikut:<br>
+■ Harga <= Rp 50.000 -> laba 10%<br>
+■ Harga > Rp 50.000 - 100.000 -> laba 15% <br>
+■ Harga > Rp 100.000 - 300.000 -> laba 20% <br>
+■ Harga > Rp 300.000 - 500.000 -> laba 25% <br>
+■ Harga > Rp 500.000 -> laba 30%,<br>
+- nett_sales	: harga setelah diskon,
+- nett_profit 	: keuntungan yang diperoleh Kimia Farma,
+- rating_transaksi 	: penilaian konsumen terhadap transaksi yang dilakukan.
+ <br>
+
 <details>
   <summary> Klik untuk melihat Query </summary>
-    <br>
+<br>
     
 ```sql
-CREATE TABLE agg_table (
+--Membuat Tabel Analisa
+
+CREATE TABLE `rakamin-kf-analytics-427207.kimia_farma.kf_analysis_table` AS(
 SELECT
-    tanggal,
-    MONTHNAME(tanggal) AS bulan,        -- kolom nama bulan
-    id_invoice,
-    cabang_sales AS lokasi_cabang,
-    nama AS pelanggan,
-    nama_barang AS produk,
-    lini AS merek,
-    jumlah AS jumlah_produk_terjual,
-    harga AS harga_satuan,
-    (jumlah * harga) AS total_pendapatan  -- kolom baru total pendapatan
-FROM base_table
-ORDER BY 1, 4, 5, 6, 7, 8, 9, 10
-);
+  ft.transaction_id,
+  ft.date,
+  ft.branch_id,
+  kc.branch_name,
+  kc.kota,
+  kc.provinsi,
+  kc.rating rating_cabang,
+  ft.customer_name,
+  ft.product_id,
+  p.product_name,
+  p.price actual_price,
+  ft.discount_percentage,
+--Menghitung Persentase gross laba sesuai ketentuan
+  CASE 
+    WHEN p.price <= 50000 THEN 0.1
+    WHEN p.price > 50000 AND p.price <= 100000 THEN 0.15
+    WHEN p.price > 100000 AND p.price <= 300000 THEN 0.2
+    WHEN p.price > 300000 AND p.price <= 500000 THEN 0.25
+    WHEN p.price > 50000 THEN 0.3
+  END persentase_gross_laba,
+--Menghitung Nett Sales (Harga Setelah Diskon)
+  p.price-(p.price*ft.discount_percentage) nett_sales,
+--Menghitung Nett Profit (Keuntungan setelah diskon)
+  ft.price-(p.price-(p.price*ft.discount_percentage)) nett_profit,
+  ft.rating rating_transaksi
+FROM
+  `rakamin-kf-analytics-427207.kimia_farma.kf_final_transaction` as ft
+--Menggabungkan tabel final transaksi dan tabel kantor cabang
+JOIN
+  `rakamin-kf-analytics-427207.kimia_farma.kf_kantor_cabang` as kc ON ft.branch_id=kc.branch_id
+--Menggabungkan tabel final transaksi dan tabel produk
+JOIN
+  `rakamin-kf-analytics-427207.kimia_farma.kf_product` as p ON ft.product_id=p.product_id
+)
+
 ```
-    
+
 <br>
 </details>
 <br>
-<p align="center">
-    <kbd> <img width="750" alt="sample aggregat" src="https://user-images.githubusercontent.com/115857221/222876809-62000814-75b6-4f82-b6b7-05d00e618315.png"> </kbd> <br>
-    Gambar 2 — Sampel Hasil Pembuatan Tabel Aggregat
-</p>
-<br>
+
+
 ---
-## 📂 **Data Visualization**
-[Lihat pada halaman Looker Data Studio](https://lookerstudio.google.com/reporting/3c67b292-3be2-484d-bc29-27bd0b4015fd).
-<p align="center">
-    <kbd> <img width="1000" alt="Kimia_Farma_page-0001" src="https://user-images.githubusercontent.com/115857221/222877035-53371a89-081d-4ec5-9e72-65b0176a96fd.jpg"> </kbd> <br>
-    Gambar 3 — Sales Report Dashboard PT. Kimia Farma
-</p>
+## **Data Visualization**
 <br>
+<details>
+  <summary> Klik untuk melihat link Dashboard </summary>
+	<br>
+https://lookerstudio.google.com/reporting/d1c0d12d-e05d-4569-83c4-ae308894e02d
+
+</details>
+<br>
+
 ---
+## Terima Kasih!
+
+Terima kasih telah mengunjungi repositori ini! Jika Anda memiliki pertanyaan atau saran, jangan ragu untuk menghubungi saya.
+
+### Kontak
+
+- **Email**: [almaidah040@gmail.com](mailto:almaidah040@gmail.com)
+- **LinkedIn**: [LinkedIn](https://www.linkedin.com/in/al-maidah-/)
