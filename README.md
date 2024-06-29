@@ -14,21 +14,23 @@ Program Project Based Internship kolaborasi [Rakamin Academy](https://www.rakami
 
 **Dataset** <br>
 Dataset yang disediakan terdiri dari tabel-tabel berikut:
-- kf_final_transaaction.csv
-- kf_inventory.csv
+- [kf_final_transaction.csv](https://drive.google.com/file/d/1OCl_PGpyGkp_I-L8eMTX0BzzdImc0l6m/view?usp=sharing)
+- [kf_inventory.csv](https://drive.google.com/file/d/11AkoPyC3x2cVDC1Fe3FQq1ZbuZHrz1Gs/view?usp=sharing)
 - kf_kantor_cabang.csv
 - kf_product.csv
 <br>
+
+
 <details>
-  <summary>Klik untuk melihat Skema</summary>
-<br>
+  <summary>Klik untuk melihat Schema</summary>
+
 <p align="center">
-    <kbd> <img width="1000" alt="sample table base" src="https://user-images.githubusercontent.com/115857221/222876639-20e1e208-1c5b-4279-8e18-ec937c56f526.png"> </kbd> <br>
-    Gambar 1 — Sampel Hasil Skema 
+  <kbd> <img width="400" alt="schema" src=(image/schema.png)></kbd> <br>
 </p>
-<br>
+
 </details>
 <br>
+
 ---
 ## 📂 **Design Datamart**
 ### Tabel Base
@@ -72,7 +74,7 @@ ALTER TABLE base_table ADD PRIMARY KEY(id_invoice);
 </details>
 <br>
 <p align="center">
-    <kbd> <img width="1000" alt="sample table base" src="https://user-images.githubusercontent.com/115857221/222876639-20e1e208-1c5b-4279-8e18-ec937c56f526.png"> </kbd> <br>
+    <kbd> <img width="1000" alt="sample table base" src="[https://user-images.githubusercontent.com/115857221/222876639-20e1e208-1c5b-4279-8e18-ec937c56f526.png](https://drive.google.com/file/d/1yep0EQzHCvAQQr4GlzlwpjqnM6NyS8a0/view?usp=sharing)"> </kbd> <br>
     Gambar 1 — Sampel Hasil Pembuatan Tabel Base 
 </p>
 <br>
