@@ -44,16 +44,20 @@ Setelah mengimport dataset ke bigquery, selanjutnya membuat tabel analisa menggu
 - actual_price 		: harga obat, <br>
 - discount_percentage 	: Persentase diskon yang diberikan pada obat, <br>
 - persentase_gross_laba : Persentase laba yang seharusnya diterima dari obat dengan ketentuan berikut:<br>
-■ Harga <= Rp 50.000 -> laba 10%<br>
-■ Harga > Rp 50.000 - 100.000 -> laba 15% <br>
-■ Harga > Rp 100.000 - 300.000 -> laba 20% <br>
-■ Harga > Rp 300.000 - 500.000 -> laba 25% <br>
-■ Harga > Rp 500.000 -> laba 30%,<br>
+<br>
+	<details>
+	  <summary> Ketentuan </summary>
+		■ Harga <= Rp 50.000 -> laba 10%<br>
+		■ Harga > Rp 50.000 - 100.000 -> laba 15% <br>
+		■ Harga > Rp 100.000 - 300.000 -> laba 20% <br>
+		■ Harga > Rp 300.000 - 500.000 -> laba 25% <br>
+		■ Harga > Rp 500.000 -> laba 30%,<br>
+	</details>
 - nett_sales	: harga setelah diskon,<br>
 - nett_profit 	: keuntungan yang diperoleh Kimia Farma, <br>
 - rating_transaksi 	: penilaian konsumen terhadap transaksi yang dilakukan.
  <br>
-
+<br>
 <details>
   <summary> Klik untuk melihat Query </summary>
 <br>
@@ -118,10 +122,12 @@ https://lookerstudio.google.com/reporting/d1c0d12d-e05d-4569-83c4-ae308894e02d
 
 ---
 ## Terima Kasih!
-
+<br>
 Terima kasih telah mengunjungi repositori ini! Jika Anda memiliki pertanyaan atau saran, jangan ragu untuk menghubungi saya.
+<br>
 
-### Kontak
+
+## Kontak
 
 - **Email**: [almaidah040@gmail.com](mailto:almaidah040@gmail.com)
 - **LinkedIn**: [LinkedIn](https://www.linkedin.com/in/al-maidah-/)
