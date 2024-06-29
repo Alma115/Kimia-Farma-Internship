@@ -1,11 +1,24 @@
 # **Bigdata Analysis - Kimia Farma**
 
+<details>
+	<summary>
+		Data Exploration & Snapshoot
+	</summary>
+	<br>
+	Data Expiration Time: 6/29/25 8.00 PM<br>
+	Snapshot Time: 6/23/24 12.00 AM
+<br>
+</details>
+
+<br>
 Visualization : [Lihat dashboard](https://lookerstudio.google.com/reporting/d1c0d12d-e05d-4569-83c4-ae308894e02d)
 <br>
 Dataset : [PBI kimia farma](https://drive.google.com/drive/folders/1lmHjlOHFhlVC0gpGcmpB5ENeJI51uQms?usp=sharing)
 <br>
 Tabel Analisa: [Hasil tabel analisa](https://drive.google.com/file/d/1WShCHDzb7H3p5jY89vEHPEX-41umeKfk/view?usp=sharing)
 <br>
+
+
 ---
 **Introduction**
 <br>
